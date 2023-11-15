@@ -2,6 +2,7 @@ package com.testNutech.ApiProgrammer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestController
 @Tag(name = "Module Membership")
 @RequestMapping("/profile")
+@CrossOrigin()
 public class UserController {
 	@Autowired
 	private UserRepository userRepo;

@@ -35,7 +35,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @Tag(name = "Register and login")
-@CrossOrigin(origins = "*")
+@CrossOrigin()
 public class AuthController {
 	@Autowired
 	CekFormatEmail cekEmail;
