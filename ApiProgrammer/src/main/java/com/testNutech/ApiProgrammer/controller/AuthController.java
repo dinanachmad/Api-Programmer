@@ -56,7 +56,7 @@ public class AuthController {
 	
 	@CrossOrigin()
 	@Operation(summary = "Login", description = "Login Menggunakan email dan password yang sudah terdaftar")
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
 	public HttpResponse<JwtResponse> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 		HttpResponse<JwtResponse> result = new HttpResponse<JwtResponse>();
 		
@@ -86,7 +86,7 @@ public class AuthController {
 			@ApiResponse(responseCode = "200", description = "Request Successfully"),
 			@ApiResponse(responseCode = "400", description = "Bad Request")
 	})
-	@PostMapping("/registration")
+	@PostMapping(value = "/registration", produces = "application/json")
 	public HttpResponse<UserDto> register(@RequestBody UserRegistrationReq req) {
 		HttpResponse<UserDto> result = new HttpResponse<UserDto>();
 		if (cekEmail.cekFormat(req.getEmail()) && req.getPassword().length() >= 8) {
