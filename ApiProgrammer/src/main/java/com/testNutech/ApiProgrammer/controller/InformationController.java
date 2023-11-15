@@ -18,7 +18,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @Tag(name = "Module Information")
-@CrossOrigin()
 public class InformationController {
 	
 	@Autowired
@@ -27,6 +26,7 @@ public class InformationController {
 	@Autowired
 	private ServiceService serviceService;
 	
+	@CrossOrigin()
 	@GetMapping("/banner")
 	public HttpResponse<List<Banner>> showBanner(){
 		HttpResponse<List<Banner>> result = new HttpResponse<List<Banner>>();
@@ -39,6 +39,7 @@ public class InformationController {
 		return result;
 	}
 	
+	@CrossOrigin()
 	@GetMapping("/service")
 	@SecurityRequirement(name = "Tokenbearer")
 	public HttpResponse<List<Service>> showService(){

@@ -35,7 +35,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @Tag(name = "Register and login")
-@CrossOrigin()
 public class AuthController {
 	@Autowired
 	CekFormatEmail cekEmail;
@@ -55,6 +54,7 @@ public class AuthController {
 	@Autowired
 	private MyUserDetailsService userDetailsService;
 	
+	@CrossOrigin()
 	@Operation(summary = "Login", description = "Login Menggunakan email dan password yang sudah terdaftar")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public HttpResponse<JwtResponse> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
@@ -80,6 +80,7 @@ public class AuthController {
 		
 	}
 	
+	@CrossOrigin()
 	@Operation(summary = "Register new user", description = "Registering for new user")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Request Successfully"),

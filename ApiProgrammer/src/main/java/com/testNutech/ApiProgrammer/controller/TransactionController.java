@@ -39,7 +39,6 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @Tag(name = "Module Transaction")
-@CrossOrigin()
 public class TransactionController {
 	
 	@Autowired
@@ -63,6 +62,7 @@ public class TransactionController {
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 	
+	@CrossOrigin()
 	@PostMapping("/topup")
 	@SecurityRequirement(name = "Tokenbearer")
 	public HttpResponse<UsersBalanceDto> topUpBalance(@RequestBody UsersBalanceDto userBalance, HttpServletRequest request){
@@ -104,6 +104,7 @@ public class TransactionController {
 		return result;
 	}
 	
+	@CrossOrigin()
 	@GetMapping("/balance")
 	@SecurityRequirement(name = "Tokenbearer")
 	public HttpResponse<InfoBalance> getBalance(HttpServletRequest request){
@@ -127,6 +128,7 @@ public class TransactionController {
 		return result;
 	}
 	
+	@CrossOrigin()
 	@PostMapping("/transaction")
 	@SecurityRequirement(name = "Tokenbearer")
 	public HttpResponse<Transaction> transaction(@RequestBody TransactionReq transReq, HttpServletRequest request) throws Exception{
@@ -197,6 +199,7 @@ public class TransactionController {
 		
 	}
 	
+	@CrossOrigin()
 	@GetMapping("/transaction/history")
 	@SecurityRequirement(name = "Tokenbearer")
 	public HttpResponse<List<HistoryTransactionDto>> getHistoryTrans(@RequestParam Integer offset, @RequestParam Integer limit, HttpServletRequest request){

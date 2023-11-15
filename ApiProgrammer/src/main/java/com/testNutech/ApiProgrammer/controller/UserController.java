@@ -38,7 +38,7 @@ public class UserController {
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 	
-	
+	@CrossOrigin()
 	@GetMapping
 	@SecurityRequirement(name = "Tokenbearer")
 	public HttpResponse<UserDto> getUserInformation(HttpServletRequest request) {
@@ -63,6 +63,7 @@ public class UserController {
 		return result;
 	}
 	
+	@CrossOrigin()
 	@PutMapping("/update")
 	@SecurityRequirement(name = "Tokenbearer")
 	public HttpResponse<UserDto> userUpdate(@RequestBody updateData data, HttpServletRequest request) {
