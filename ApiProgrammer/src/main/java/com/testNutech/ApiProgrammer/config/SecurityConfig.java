@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig implements WebMvcConfigurer{
+public class SecurityConfig {
 	@Autowired
 	private DelegatedAuthenticationEntryPoint authenticationEntryPoint;
 
@@ -36,7 +36,7 @@ public class SecurityConfig implements WebMvcConfigurer{
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		return http.csrf(c -> c.disable())
+		return http.cors(a -> a.disable()).csrf(c -> c.disable())
 				.authorizeHttpRequests(auth -> {
 					auth.requestMatchers("/login",
 							"/registration",
@@ -56,9 +56,5 @@ public class SecurityConfig implements WebMvcConfigurer{
 				.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
 				.build()
 				;
-	}
-	
-	public void addCorsMapping(CorsRegistry registry) {
-		registry.addMapping("/**");
 	}
 }
