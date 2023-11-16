@@ -61,20 +61,4 @@ public class SecurityConfig {
 				.build()
 				;
 	}
-	
-	@Bean
-	public ServletWebServerFactory servletContainer() {
-	    TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
-	        @Override
-	        protected void postProcessContext(Context context) {
-	            SecurityConstraint securityConstraint = new SecurityConstraint();
-	            securityConstraint.setUserConstraint("CONFIDENTIAL");
-	            SecurityCollection collection = new SecurityCollection();
-	            collection.addPattern("/*");
-	            securityConstraint.addCollection(collection);
-	            context.addConstraint(securityConstraint);
-	        }
-	    };
-	    return tomcat;
-	}
 }
