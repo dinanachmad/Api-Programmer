@@ -66,6 +66,10 @@ public class TransactionController {
 	@PostMapping("/topup")
 	@SecurityRequirement(name = "Tokenbearer")
 	public HttpResponse<UsersBalanceDto> topUpBalance(@RequestBody UsersBalanceDto userBalance, HttpServletRequest request){
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String dateTime = currentDateTime.format(formatDate);
+		
 		String jwtToken = getToken(request);
 		User user = userRepo.findByEmail(jwtTokenUtil.getUsernameFromToken(jwtToken));
 		
@@ -84,6 +88,17 @@ public class TransactionController {
 				
 				userBalanceRepo.save(balance);
 				
+				HistoryTransaction hisTransaction = HistoryTransaction.builder()
+						.invoice_number("TOP UP " + user.getId())
+						.user_id(user.getId())
+						.description("Top Up balance")
+						.transaction_type("Top Up")
+						.total_amount(userBalance.getTop_up_amount())
+						.created_on(dateTime)
+						.build();
+				
+				historyTransRepo.save(hisTransaction);
+				
 			} else {
 				UsersBalance balance = UsersBalance.builder()
 						.userId(user.getId())
@@ -91,6 +106,17 @@ public class TransactionController {
 						.build();
 				
 				userBalanceRepo.save(balance);
+				
+				HistoryTransaction hisTransaction = HistoryTransaction.builder()
+						.invoice_number("TOP UP " + user.getId())
+						.user_id(user.getId())
+						.description("Top Up balance")
+						.transaction_type("Top Up")
+						.total_amount(userBalance.getTop_up_amount())
+						.created_on(dateTime)
+						.build();
+				
+				historyTransRepo.save(hisTransaction);
 			}
 			
 			
@@ -150,6 +176,7 @@ public class TransactionController {
 					.user_id(user.getId())
 					.service_code(service.getServiceCode())
 					.service_name(service.getServiceName())
+					.invoice_number("INV-" + user.getId() + "-" + dateTime)
 					.transaction_type("PAYMENT")
 					.total_amount(service.getServiceTarif())
 					.created_on(dateTime)
