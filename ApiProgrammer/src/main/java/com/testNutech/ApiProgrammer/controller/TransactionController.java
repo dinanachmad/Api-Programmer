@@ -144,7 +144,7 @@ public class TransactionController {
 		
 		Service service = serviceService.findByServiceCode(transReq.getService_code());
 		
-		if(balance.getBalance() >= service.getServiceTarif()) {
+		if(balance.getBalance() != null) {
 			
 			Transaction transaction = Transaction.builder()
 					.user_id(user.getId())
