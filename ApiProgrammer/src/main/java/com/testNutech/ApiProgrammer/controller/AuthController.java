@@ -55,7 +55,7 @@ public class AuthController {
 	private MyUserDetailsService userDetailsService;
 	
 	@CrossOrigin()
-	@Operation(summary = "Login", description = "Login Menggunakan email dan password yang sudah terdaftar")
+	@Operation(summary = "Login", description = "Login Menggunakan email dan password yang sudah terdaftar, password harus lebih dari sama dengan 8")
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
 	public HttpResponse<JwtResponse> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 		HttpResponse<JwtResponse> result = new HttpResponse<JwtResponse>();
@@ -81,7 +81,7 @@ public class AuthController {
 	}
 	
 	@CrossOrigin()
-	@Operation(summary = "Register new user", description = "Registering for new user")
+	@Operation(summary = "Register new user, password harus lebih dari sama dengan 8", description = "Registering for new user, password harus lebih dari sama dengan 8")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Request Successfully"),
 			@ApiResponse(responseCode = "400", description = "Bad Request")

@@ -50,7 +50,7 @@ CREATE TABLE history_transaction (
 CREATE TABLE transaction (
     id          		INT(11) NOT NULL AUTO_INCREMENT,
 	user_id				INT(11) NOT NULL,
-    invoice_number		VARCHAR(100) GENERATED ALWAYS AS (CONCAT('INV', LPAD(id,3,'0'))),
+    invoice_number		VARCHAR(100),
     service_code		VARCHAR(100),
 	service_name		VARCHAR(100),
     transaction_type	VARCHAR(20),
